@@ -1,0 +1,7 @@
+version: "3"
+services:
+  myapp:
+    image: ailapina150/flowers
+    deploy:
+      mode: replicated
+      replicas: 6
