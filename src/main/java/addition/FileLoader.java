@@ -42,15 +42,16 @@ public class FileLoader {
             e.getStackTrace();
         }
     }
+
     public static List<List<String>> getFilesNamesGroup(String path, List<String> finished) {
         List<String> filesNames = Objects.requireNonNull(getFilesNames(path)).stream()
-                .filter(fileName-> !finished.contains(getSingleName(fileName)))
+                .filter(fileName -> !finished.contains(getSingleName(fileName)))
                 .toList();
         return makeListOfList(filesNames, AppProperties.NUMBER_PHOTO_IN_GROUP, true);
     }
 
     public static String getSingleName(String fullName) {
-        if(fullName ==  null) return "";
+        if (fullName == null) return "";
         return fullName.substring(fullName.lastIndexOf("\\") + 1, fullName.lastIndexOf("."))
                 .substring(fullName.lastIndexOf("/") + 1);
     }
@@ -79,18 +80,18 @@ public class FileLoader {
     }
 
     public static void writeGoods() {
-        try(ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream("goods.bin"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("goods.bin"))) {
             oos.writeObject(AppProperties.get().goods);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
 
     public static void readGoods() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("goods.bin"))) {
-            System.out.println( AppProperties.get().goods);
+            System.out.println(AppProperties.get().goods);
             AppProperties.get().goods = (Goods) ois.readObject();
-            System.out.println( AppProperties.get().goods);
+            System.out.println(AppProperties.get().goods);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -98,9 +99,9 @@ public class FileLoader {
     }
 
     public static void writeFirstDay() {
-        try(ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream("first_day.bin"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("first_day.bin"))) {
             oos.writeObject(AppProperties.get().firstDay);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -114,9 +115,9 @@ public class FileLoader {
     }
 
     public static void writeLastDay() {
-        try(ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream("last_day.bin"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("last_day.bin"))) {
             oos.writeObject(AppProperties.get().lastDay);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

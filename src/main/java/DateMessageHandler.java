@@ -3,7 +3,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.time.LocalDate;
 
-public class DateMessageHandler extends MessageHandler{
+public class DateMessageHandler extends MessageHandler {
     public DateMessageHandler(BotUser botUser) {
         super(botUser);
     }

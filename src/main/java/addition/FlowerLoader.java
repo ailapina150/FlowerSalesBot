@@ -10,13 +10,14 @@ public final class FlowerLoader {
         filesNameGroup.addAll(FileLoader.getFilesNamesGroup(AppProperties.TULIP, AppProperties.get().goods.getFinished()));
     }
 
-    public static synchronized  List<List<String>> get(){
-        if(filesNameGroup == null){
+    public static synchronized List<List<String>> get() {
+        if (filesNameGroup == null) {
             new FlowerLoader();
         }
         return filesNameGroup;
     }
-    public static void remake(){
+
+    public static void remake() {
         filesNameGroup = FileLoader.getFilesNamesGroup(AppProperties.PEONY, AppProperties.get().goods.getFinished());
         filesNameGroup.addAll(FileLoader.getFilesNamesGroup(AppProperties.TULIP, AppProperties.get().goods.getFinished()));
     }

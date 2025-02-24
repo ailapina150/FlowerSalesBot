@@ -1,7 +1,7 @@
 import addition.*;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class TelephoneMessageHandler extends MessageHandler{
+public class TelephoneMessageHandler extends MessageHandler {
     protected TelephoneMessageHandler(BotUser botUser) {
         super(botUser);
     }
@@ -24,21 +24,21 @@ public class TelephoneMessageHandler extends MessageHandler{
         if (text.matches("^[+][0-9]{12}$")) {
             addStateId(message);
             botUser.getOrder().setTelephone(text);
-            if(!botUser.getTelephone().equals(text)) {
+            if (!botUser.getTelephone().equals(text)) {
                 sendMessage(AppProperties.COLLECTOR_CHAT_ID,
                         "@" + botUser.getUserName() + " тел: " + text +
-                                " Id: " + chatId + " " + botUser.getFirstName()+ " " + getBotUsername());
+                                " Id: " + chatId + " " + botUser.getFirstName() + " " + getBotUsername());
             }
             botUser.setTelephone(text);
             clean();
-            if(botUser.getLastState() == State.INPUT_QUESTION){
+            if (botUser.getLastState() == State.INPUT_QUESTION) {
                 sendMessage(AppProperties.ORDERS_CHAT_ID, "Вопрос:\n "
                         + botUser.getCurrantQuestion()
                         + "\nTelegram: " + " https://t.me/" + botUser.getUserName() + "\nТелефон: " + botUser.getTelephone());
                 sendMessage(chatId, "Вопрос принят. Наш оператор свяжется с Вами в ближайшее время.");
                 botUser.setCurrantQuestion("");
                 botUser.setCurrantState(State.SELECT_QUESTION);
-            } else if(botUser.getLastState() == State.INPUT_ADDRESS){
+            } else if (botUser.getLastState() == State.INPUT_ADDRESS) {
                 addStateId(sendMessage(chatId, "Выберите материал для упаковки", WrapperButton.getNames()));
                 botUser.setCurrantState(State.INPUT_WRAPPER);
             } else {

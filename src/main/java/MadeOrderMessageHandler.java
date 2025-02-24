@@ -3,7 +3,7 @@ import addition.Button;
 import addition.State;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class MadeOrderMessageHandler extends MessageHandler{
+public class MadeOrderMessageHandler extends MessageHandler {
     protected MadeOrderMessageHandler(BotUser botUser) {
         super(botUser);
     }
@@ -18,7 +18,7 @@ public class MadeOrderMessageHandler extends MessageHandler{
         } else {
             botUser.setCurrantState(State.SELECT_QUESTION);
             MessageHandler messageHandler = new QuestionMessageHandler(botUser);
-            messageHandler.handle(message,buttonData);
+            messageHandler.handle(message, buttonData);
         }
     }
 

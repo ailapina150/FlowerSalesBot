@@ -2,7 +2,7 @@ import addition.BotUser;
 import addition.State;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class AddressMessageHandler extends MessageHandler{
+public class AddressMessageHandler extends MessageHandler {
     public AddressMessageHandler(BotUser botUser) {
         super(botUser);
     }

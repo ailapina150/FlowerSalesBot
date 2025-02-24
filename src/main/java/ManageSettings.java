@@ -4,9 +4,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import java.time.LocalDate;
 import java.util.List;
 
-public class ManageSettings extends TelegramSender{
+public class ManageSettings extends TelegramSender {
     @Override
-    public void onUpdateReceived(Update update) {}
+    public void onUpdateReceived(Update update) {
+    }
 
     public ManagingSettingsButtons manageSettings(String command) {
         System.out.println("manageSettings");
@@ -42,7 +43,7 @@ public class ManageSettings extends TelegramSender{
             case REMOVE_FLOWER -> {
                 List<List<String>> flowers = FlowerLoader.get()
                         .stream()
-                        .map(flowerList-> flowerList.stream()
+                        .map(flowerList -> flowerList.stream()
                                 .map(FileLoader::getSingleName)
                                 .toList())
                         .toList();
@@ -59,12 +60,12 @@ public class ManageSettings extends TelegramSender{
                 }
             }
             case FIRST_DATE -> {
-                sendMessage(chatId,"Дата начала доставки заказов " + AppProperties.get().getFirstDay() +
+                sendMessage(chatId, "Дата начала доставки заказов " + AppProperties.get().getFirstDay() +
                         "\nНапишити новое значение даты:");
                 return setting;
             }
             case LAST_DATE -> {
-                sendMessage(chatId,"Дата окончания доставки заказов " + AppProperties.get().getLastDay() +
+                sendMessage(chatId, "Дата окончания доставки заказов " + AppProperties.get().getLastDay() +
                         "\nНапишити новое значение даты:");
                 return setting;
             }
@@ -75,7 +76,7 @@ public class ManageSettings extends TelegramSender{
     public ManagingSettingsButtons changeSetting(ManagingSettingsButtons currant, String text) {
         System.out.println("changeSetting");
         long chatId = AppProperties.ORDERS_CHAT_ID;
-        if(currant == null) return null;
+        if (currant == null) return null;
         System.out.println(currant);
         switch (currant) {
             case PRICE_PEONY -> {
@@ -126,7 +127,7 @@ public class ManageSettings extends TelegramSender{
                 }
                 currant = null;
             }
-            case DISCOUNT_SIZE ->{
+            case DISCOUNT_SIZE -> {
                 try {
                     int x = Integer.parseInt(text);
                     AppProperties.get().goods.setDiscountSize(x);
@@ -175,7 +176,7 @@ public class ManageSettings extends TelegramSender{
                     AppProperties.get().setFirstDay(firstDate);
                     sendMessage(chatId, "Дата начало доставки заказов " + AppProperties.get().getFirstDay());
                     FileLoader.writeFirstDay();
-                }catch(Exception e){
+                } catch (Exception e) {
                     sendMessage(chatId, "Не верный формат или введенное значение не является датой");
                 }
                 currant = null;
@@ -189,7 +190,7 @@ public class ManageSettings extends TelegramSender{
                     AppProperties.get().setLastDay(lastDate);
                     sendMessage(chatId, "Дата окончания доставки заказов " + AppProperties.get().getLastDay());
                     FileLoader.writeLastDay();
-                }catch(Exception e){
+                } catch (Exception e) {
                     sendMessage(chatId, "Не верный формат или введенное значение не является датой");
                 }
                 currant = null;

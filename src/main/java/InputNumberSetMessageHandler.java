@@ -4,7 +4,7 @@ import addition.FlowersSet;
 import addition.State;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class InputNumberSetMessageHandler extends MessageHandler{
+public class InputNumberSetMessageHandler extends MessageHandler {
     protected InputNumberSetMessageHandler(BotUser botUser) {
         super(botUser);
     }
@@ -15,13 +15,13 @@ public class InputNumberSetMessageHandler extends MessageHandler{
         if (message.getText().matches("[0-9]+")) {
             clean();
             int countSet = Integer.parseInt(message.getText());
-            if(countSet > 0) {
+            if (countSet > 0) {
                 botUser.getOrder().addFlowerSet(new FlowersSet(botUser.getFlowersSet().getFlowers(), countSet, true));
                 botUser.getFlowersSet().getFlowers().clear();
                 addStateId(message);
                 addId(sendMessageWithRowButton(chatId, ActButton.CANCEL_REGISTRATION.getReplay(), ActButton.getNextSetButtons()));
                 botUser.setCurrantState(State.SELECT_ACT);
-            }else{
+            } else {
                 addId(message);
                 addId(sendMessage(chatId, "Количество букетов должно быть больше нуля"));
             }
@@ -33,12 +33,12 @@ public class InputNumberSetMessageHandler extends MessageHandler{
 
     @Override
     public boolean cancel() {
-        System.out.println(botUser.getCurrantState() +"cancel");
+        System.out.println(botUser.getCurrantState() + "cancel");
         cleanState(State.SELECT_ACT);
         botUser.getFlowersSet().setCountSet(1);
         botUser.getFlowersSet().setInputSetNumber(false);
         cleanState(State.INPUT_NUMBER_FLOWERS);
-        if( botUser.getFlowersSet().getFlowers().size()>0) {
+        if (botUser.getFlowersSet().getFlowers().size() > 0) {
             botUser.removeLastFlower();
         }
         botUser.setCurrantState(State.INPUT_NUMBER_FLOWERS);

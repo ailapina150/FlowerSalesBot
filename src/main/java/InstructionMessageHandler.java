@@ -1,7 +1,7 @@
 import addition.*;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class InstructionMessageHandler extends  MessageHandler{
+public class InstructionMessageHandler extends MessageHandler {
     public InstructionMessageHandler(BotUser botUser) {
         super(botUser);
     }
@@ -19,13 +19,13 @@ public class InstructionMessageHandler extends  MessageHandler{
                     "3. Нажимаем на \"Поделиться\"."));
             addStateId(sendResourcesPhoto(chatId, AppProperties.INSTRUCTION + "/" + "photo_4.jpg",
                     "4. Найдите телеграмм"));
-            addStateId(sendResourcesPhoto(chatId, AppProperties.INSTRUCTION + "/" + "photo_5.jpg",  """
-                     5. Выберете 50 или более контактов
-                     6. Нажмите отправить."""));
-            addStateId(sendResourcesPhoto(chatId, AppProperties.INSTRUCTION + "/" + "photo_6.jpg",  """
-                     7. Сделайте скриншоты или видео
-                       в подтверждение рассылки
-                     8. Отправите файлы в этот чат"""));
+            addStateId(sendResourcesPhoto(chatId, AppProperties.INSTRUCTION + "/" + "photo_5.jpg", """
+                    5. Выберите 50 или более контактов
+                    6. Нажмите отправить."""));
+            addStateId(sendResourcesPhoto(chatId, AppProperties.INSTRUCTION + "/" + "photo_6.jpg", """
+                    7. Сделайте скриншоты или видео
+                      в подтверждение рассылки
+                    8. Отправите файлы в этот чат"""));
             botUser.setCurrantState(botUser.getLastState());
         } else if (button != null && button.equals(Button.NO)) {
             sendMessageWithRowButton(chatId, "Выберите действие", ActButton.getStartButton(), 2, false);

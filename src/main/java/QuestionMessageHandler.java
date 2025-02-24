@@ -1,7 +1,7 @@
 import addition.*;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class QuestionMessageHandler extends MessageHandler{
+public class QuestionMessageHandler extends MessageHandler {
 
     protected QuestionMessageHandler(BotUser botUser) {
         super(botUser);
@@ -31,9 +31,9 @@ public class QuestionMessageHandler extends MessageHandler{
                     }
                 }
             }
-            if(!menage){
+            if (!menage) {
                 MessageHandler messageHandler = new StartMessageHandler(botUser);
-                messageHandler.handle(message,buttonData);
+                messageHandler.handle(message, buttonData);
             }
         } else {
             addId(message);
