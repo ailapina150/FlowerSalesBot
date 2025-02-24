@@ -4,7 +4,7 @@ import addition.BotUser;
 import addition.State;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class SubmitMessageHandler extends MessageHandler{
+public class SubmitMessageHandler extends MessageHandler {
     protected SubmitMessageHandler(BotUser botUser) {
         super(botUser);
     }

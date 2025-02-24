@@ -1,7 +1,7 @@
 import addition.*;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class RegistrationMessageHandler extends MessageHandler{
+public class RegistrationMessageHandler extends MessageHandler {
     protected RegistrationMessageHandler(BotUser botUser) {
         super(botUser);
     }
@@ -11,7 +11,7 @@ public class RegistrationMessageHandler extends MessageHandler{
         Button button = Button.getButtonOnNames(buttonData);
         clean();
         if (!message.getFrom().getIsBot()) addId(message);
-        if(botUser.getFlowersSet().getFlowers()!= null && botUser.getFlowersSet().getFlowers().size()>0){
+        if (botUser.getFlowersSet().getFlowers() != null && botUser.getFlowersSet().getFlowers().size() > 0) {
             botUser.getOrder().addFlowerSet(
                     new FlowersSet(
                             botUser.getFlowersSet().getFlowers(),

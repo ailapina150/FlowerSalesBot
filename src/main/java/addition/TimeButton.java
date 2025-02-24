@@ -21,19 +21,20 @@ public enum TimeButton {
         this.name = name;
     }
 
-    public  static  List<String> getNames(){
+    public static List<String> getNames() {
         return Arrays.stream(TimeButton.values()).map(TimeButton::getName).toList();
     }
 
-    public static TimeButton getButtonOnName(String name){
-        for(TimeButton button : TimeButton.values()){
-            if(button.getName().equals(name)){
+    public static TimeButton getButtonOnName(String name) {
+        for (TimeButton button : TimeButton.values()) {
+            if (button.getName().equals(name)) {
                 return button;
             }
         }
         return null;
     }
-    public boolean equals(TimeButton button){
+
+    public boolean equals(TimeButton button) {
         return (this.name.equals(button.getName().toLowerCase()));
     }
 }

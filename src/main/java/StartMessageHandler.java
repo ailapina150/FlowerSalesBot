@@ -1,7 +1,7 @@
 import addition.*;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class StartMessageHandler extends MessageHandler{
+public class StartMessageHandler extends MessageHandler {
 
     protected StartMessageHandler(BotUser botUser) {
         super(botUser);
@@ -15,7 +15,10 @@ public class StartMessageHandler extends MessageHandler{
         if (button != null) {
             switch (button) {
                 case QUESTION -> {
-                    sendMessageWithRowButton(chatId, ActButton.QUESTION.getReplay(), QuestionButton.getNames());
+                    Integer messageId = sendMessageWithRowButton(chatId,
+                            ActButton.QUESTION.getReplay(),
+                            QuestionButton.getNames()).getMessageId();
+                    pinMessage(chatId, messageId);
                     botUser.setCurrantState(State.SELECT_QUESTION);
                 }
                 case FOR_FREE -> {
@@ -36,7 +39,7 @@ public class StartMessageHandler extends MessageHandler{
 
     @Override
     public boolean cancel() {
-        if(botUser.getLastState() == State.SUBMIT){
+        if (botUser.getLastState() == State.SUBMIT) {
             sendMessage(chatId, QuestionButton.CORRECT.getReplay());
         }
         return true;

@@ -1,4 +1,5 @@
 package addition;
+
 import java.util.*;
 
 public class Order {
@@ -35,13 +36,15 @@ public class Order {
         this.address = address;
     }
 
-    public void setTelephone(String telephone) {this.telephone = telephone;}
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
     public List<FlowersSet> getFlowerSetList() {
         return flowersSetList;
     }
 
-    public void addFlowerSet(FlowersSet setOfFlower){
+    public void addFlowerSet(FlowersSet setOfFlower) {
         flowersSetList.add(setOfFlower);
     }
 
@@ -65,7 +68,7 @@ public class Order {
         return telephone;
     }
 
-    public void cleanOrder(){
+    public void cleanOrder() {
         flowersSetList.clear();
         date = "";
         time = "";
@@ -74,18 +77,18 @@ public class Order {
         telephone = "";
     }
 
-    public void delLastSet(){
-       if(flowersSetList.size()>0) flowersSetList.remove(flowersSetList.size()-1);
+    public void delLastSet() {
+        if (flowersSetList.size() > 0) flowersSetList.remove(flowersSetList.size() - 1);
     }
 
-    public FlowersSet getLastSet(){
-        if(flowersSetList.size() > 0){
-            return flowersSetList.get(flowersSetList.size()-1);
+    public FlowersSet getLastSet() {
+        if (flowersSetList.size() > 0) {
+            return flowersSetList.get(flowersSetList.size() - 1);
         }
         return null;
     }
 
-    public String toSend(){
+    public String toSend() {
         return this +
                 "\n\nДата: " + date +
                 "\nВремя: " + time +
@@ -94,40 +97,40 @@ public class Order {
                 "\nУпаковка: " + wrapper;
     }
 
-    public String toString(){
+    public String toString() {
         int i = 1;
         StringBuilder s = new StringBuilder("ЗАКАЗ: \n");
-        for(FlowersSet flowers : flowersSetList) {
+        for (FlowersSet flowers : flowersSetList) {
             s.append("\nБукет N").append(i).append("\n").append(flowers.toString());
             i++;
         }
         double discount = getDiscount();
-        if(discount > 0.0001){
+        if (discount > 0.0001) {
             s.append("\nСкидка: ").append(discount).append(AppProperties.MONEY)
                     .append("\nК оплате: ").append(getCost() - discount);
-        }else {
+        } else {
             s.append("\nК ОПЛАТЕ: ").append(getCost());
         }
         s.append(AppProperties.MONEY);
         return s.toString();
     }
 
-    public double getCost(){
-        if(flowersSetList.size() == 0 ){
+    public double getCost() {
+        if (flowersSetList.size() == 0) {
             return 0;
         }
-        return  flowersSetList.stream().map(s->s.getCost()*s.getCountSet()).reduce(Double::sum).get();
+        return flowersSetList.stream().map(s -> s.getCost() * s.getCountSet()).reduce(Double::sum).get();
     }
 
-    public double getDiscount(){
-        if(getCountFlowers() < AppProperties.get().goods.getDiscountSize()) {
+    public double getDiscount() {
+        if (getCountFlowers() < AppProperties.get().goods.getDiscountSize()) {
             return 0.;
         }
         return getCost() * AppProperties.get().goods.getDiscount() / 100.;
     }
 
-    public int getCountFlowers(){
-        if(flowersSetList.size() == 0) {
+    public int getCountFlowers() {
+        if (flowersSetList.size() == 0) {
             return 0;
         }
         return flowersSetList.stream().map(FlowersSet::getCountFlowers).reduce(Integer::sum).get();

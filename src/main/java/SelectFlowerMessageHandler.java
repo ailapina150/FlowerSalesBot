@@ -3,7 +3,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.util.List;
 
-public class SelectFlowerMessageHandler extends MessageHandler{
+public class SelectFlowerMessageHandler extends MessageHandler {
     protected SelectFlowerMessageHandler(BotUser botUser) {
         super(botUser);
     }
@@ -39,7 +39,7 @@ public class SelectFlowerMessageHandler extends MessageHandler{
 
     @Override
     public boolean cancel() {
-        System.out.println(botUser.getCurrantState() + "cancel"+ botUser.getLastState());
+        System.out.println(botUser.getCurrantState() + "cancel" + botUser.getLastState());
         switch (botUser.getLastState()) {
             case INPUT_NUMBER_FLOWERS, SELECT_ACT -> {
                 cleanState(State.SELECT_ACT);

@@ -17,13 +17,13 @@ public enum WrapperButton {
         return name;
     }
 
-    public  static  List<String> getNames(){
+    public static List<String> getNames() {
         return Arrays.stream(WrapperButton.values()).map(WrapperButton::getName).toList();
     }
 
-    public static WrapperButton getButtonOnNames(String cmd){
-        for(WrapperButton button : WrapperButton.values()){
-            if(button.name.equals(cmd)){
+    public static WrapperButton getButtonOnNames(String cmd) {
+        for (WrapperButton button : WrapperButton.values()) {
+            if (button.name.equals(cmd)) {
                 return button;
             }
         }

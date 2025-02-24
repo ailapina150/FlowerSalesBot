@@ -3,7 +3,7 @@ import addition.State;
 import addition.TimeButton;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class TimeMessageHandler extends MessageHandler{
+public class TimeMessageHandler extends MessageHandler {
     protected TimeMessageHandler(BotUser botUser) {
         super(botUser);
     }
@@ -18,7 +18,7 @@ public class TimeMessageHandler extends MessageHandler{
                     clean();
                     if (message.getFrom().getIsBot()) {
                         addStateId(sendMessage(chatId, b.getName()));
-                    }else{
+                    } else {
                         addStateId(message);
                     }
                     addStateId(sendMessage(chatId, "ВАЖНО! Доставка только по БРЕСТУ. Напишите адрес"));
