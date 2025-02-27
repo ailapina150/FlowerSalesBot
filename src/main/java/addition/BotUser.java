@@ -46,50 +46,53 @@ public class BotUser {
     }
 
 
-    public List<SendId> getIds(){return ids;}
+    public List<SendId> getIds() {
+        return ids;
+    }
+
     public void setCurrantFileName(String currantFileName) {
         this.currantFileName = currantFileName;
     }
 
     public void setFlowersSet(FlowersSet setOfFlower) {
-        if(setOfFlower!= null)
-        this.flowersSet = setOfFlower;
+        if (setOfFlower != null)
+            this.flowersSet = setOfFlower;
     }
 
     public void setCurrantState(State currantState) {
-       System.out.println(this.currantState +"->"+currantState);
-       System.out.println(order.toString().replaceAll("\n"," "));
-        System.out.println(flowersSet.toString().replaceAll("\n"," "));
+        System.out.println(this.currantState + "->" + currantState);
+        System.out.println(order.toString().replaceAll("\n", " "));
+        System.out.println(flowersSet.toString().replaceAll("\n", " "));
         this.lastState = this.currantState;
         this.currantState = currantState;
     }
 
-    public State getLastState(){
+    public State getLastState() {
         return lastState;
     }
 
     public void setUserName(String userName) {
-        if(userName!=null) {
+        if (userName != null) {
             this.userName = userName;
         }
     }
 
     public void setTelephone(String telephone) {
-        if(telephone!=null) {
+        if (telephone != null) {
             this.telephone = telephone;
         }
     }
 
-    public void setPriceTulip(double price){
+    public void setPriceTulip(double price) {
         this.priceTulip = price;
     }
 
-    public void setPricePeony(double price){
+    public void setPricePeony(double price) {
         this.pricePeony = price;
     }
 
     public void setCurrantQuestion(String currantQuestion) {
-        if(currantQuestion!=null) {
+        if (currantQuestion != null) {
             this.currantQuestion = currantQuestion;
         }
     }
@@ -98,45 +101,71 @@ public class BotUser {
         this.userName = firstName;
     }
 
-    public Long getUserId() {return userId;}
+    public Long getUserId() {
+        return userId;
+    }
 
-    public String getUserName() {return userName;}
+    public String getUserName() {
+        return userName;
+    }
 
-    public String getFirstName() {return firstName;}
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public String getTelephone() {return telephone;}
+    public String getTelephone() {
+        return telephone;
+    }
 
-    public String getCurrantQuestion(){ return  currantQuestion;}
+    public String getCurrantQuestion() {
+        return currantQuestion;
+    }
 
-    public State getCurrantState() {return currantState;}
+    public State getCurrantState() {
+        return currantState;
+    }
 
-    public Order getOrder() { return order;}
+    public Order getOrder() {
+        return order;
+    }
 
-    public FlowersSet getFlowersSet() {return flowersSet;}
+    public FlowersSet getFlowersSet() {
+        return flowersSet;
+    }
 
-    public double getPriceTulip() {return priceTulip; }
+    public double getPriceTulip() {
+        return priceTulip;
+    }
 
     public double getPricePeony() {
         return pricePeony;
     }
 
-    public double getCurrantFlowerPrice(){ return currantFileName.contains(AppProperties.PEONY)? pricePeony : priceTulip;}
+    public double getCurrantFlowerPrice() {
+        return currantFileName.contains(AppProperties.PEONY) ? pricePeony : priceTulip;
+    }
 
-    public void addFlower(int countOfFlower){
+    public void addFlower(int countOfFlower) {
         Flower flower = new Flower(currantFileName, getCurrantFlowerPrice(), countOfFlower);
-        if(flowersSet == null) {
+        if (flowersSet == null) {
             flowersSet = new FlowersSet();
         }
         flowersSet.addFlower(flower);
     }
-    public void removeLastFlower(){
-        if(flowersSet.getFlowers().size()> 0) {
+
+    public void removeLastFlower() {
+        if (flowersSet.getFlowers().size() > 0) {
             setCurrantFileName(getFlowersSet().getFlowers().get(flowersSet.getFlowers().size() - 1).fileName());
             flowersSet.getFlowers().remove(flowersSet.getFlowers().size() - 1);
         }
     }
-    public void cleanOrder() { order.cleanOrder();}
 
-    public void cleanFlowersSet() { flowersSet.clean();}
+    public void cleanOrder() {
+        order.cleanOrder();
+    }
+
+    public void cleanFlowersSet() {
+        flowersSet.clean();
+    }
 
 }

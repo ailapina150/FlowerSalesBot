@@ -6,8 +6,12 @@ public record Flower(String fileName, double price, int count) {
         return FileLoader.getSingleName(fileName);
     }
 
-    public int getCount() {return count;}
+    public int getCount() {
+        return count;
+    }
 
-    public double getCost(){return price * count;}
+    public double getCost() {
+        return price * count;
+    }
 
 }

@@ -30,27 +30,27 @@ public class SaleTelegramBot extends TelegramSender {
 
     @Override
     public void onUpdateReceived(Update update) {
-        if(!update.hasCallbackQuery() && !update.hasMessage()) return;
+        if (!update.hasCallbackQuery() && !update.hasMessage()) return;
         long chatId = getChatId(update);
         Message message = getMessage(update);
         String text = message.hasText() ? message.getText() : "";
         String buttonData = getButtonData(update);
 
-        if(chatId == AppProperties.ORDERS_CHAT_ID){
-             if(text.equalsIgnoreCase(AppProperties.PASSWORD)) {
+        if (chatId == AppProperties.ORDERS_CHAT_ID) {
+            if (text.equalsIgnoreCase(AppProperties.PASSWORD)) {
                 sendMessageWithKeyBoard(chatId, "Настройки",
                         Arrays.stream(ManagingSettingsButtons.values()).map(ManagingSettingsButtons::getExplanation).toList());
             }
             ManageSettings manageSettings = new ManageSettings();
-             if(currant == null) {
-                 currant = manageSettings.manageSettings(text);
-             }else{
+            if (currant == null) {
+                currant = manageSettings.manageSettings(text);
+            } else {
                 currant = manageSettings.changeSetting(currant, buttonData);
-             }
+            }
             return;
         }
 
-        if(chatId < 0) return;
+        if (chatId < 0) return;
         if (botUsers.size() == 0 &&
                 !(text.equals(ActButton.START.getCommand()) || text.equals(ActButton.ORDER.getCommand()))) {
             sendMessage(chatId, "Произошел сбой в работе. Приносим свои извинения");
@@ -61,10 +61,10 @@ public class SaleTelegramBot extends TelegramSender {
 
         usersIdCollector(chatId, message);
         BotUser botUser = botUsers.get(chatId);
-        if((botUser.getCurrantState() == State.START
+        if ((botUser.getCurrantState() == State.START
                 || botUser.getCurrantState() == State.SELECT_QUESTION
                 || botUser.getCurrantState() == State.INSTRUCTION) &&
-        message.hasVideoNote() || message.hasVideo() || message.hasPhoto()){
+                message.hasVideoNote() || message.hasVideo() || message.hasPhoto()) {
             photoVideoCollector(chatId, message, botUser);
         }
         MessageHandler messageHandler = HandlerResolver(botUser);
@@ -79,31 +79,31 @@ public class SaleTelegramBot extends TelegramSender {
         } else {
             messageHandler.handle(message, buttonData);
         }
-        if(botUser.getCurrantState() == State.START
+        if (botUser.getCurrantState() == State.START
                 || botUser.getCurrantState() == State.SELECT_QUESTION
                 || botUser.getCurrantState() == State.INSTRUCTION) photoVideoSender(botUser);
     }
 
-    private MessageHandler HandlerResolver(BotUser botUser){
+    private MessageHandler HandlerResolver(BotUser botUser) {
         State currantState = botUser.getCurrantState();
-         return switch (currantState) {
-             case SELECT_QUESTION -> new QuestionMessageHandler(botUser);
-             case INPUT_QUESTION -> new UserQuestionMessageHandler(botUser);
-             case MADE_ORDER -> new MadeOrderMessageHandler(botUser);
-             case SELECT_FLOWER -> new SelectFlowerMessageHandler(botUser);
-             case INPUT_NUMBER_FLOWERS ->new InputNumberFlowersMessageHandler(botUser);
-             case INPUT_NUMBER_SET -> new InputNumberSetMessageHandler(botUser);
-             case SELECT_ACT -> new SelectActMessageHandler(botUser);
-             case REGISTRATION -> new RegistrationMessageHandler(botUser);
-             case INPUT_DATE -> new DateMessageHandler(botUser);
-             case SELECT_TIME -> new TimeMessageHandler(botUser);
-             case INPUT_ADDRESS -> new AddressMessageHandler(botUser);
-             case INPUT_TELEPHONE -> new TelephoneMessageHandler(botUser);
-             case INPUT_WRAPPER -> new  WrapperMessageHandler(botUser);
-             case SUBMIT -> new SubmitMessageHandler(botUser);
-             case INSTRUCTION -> new InstructionMessageHandler(botUser);
-             default -> new StartMessageHandler(botUser);
-         };
+        return switch (currantState) {
+            case SELECT_QUESTION -> new QuestionMessageHandler(botUser);
+            case INPUT_QUESTION -> new UserQuestionMessageHandler(botUser);
+            case MADE_ORDER -> new MadeOrderMessageHandler(botUser);
+            case SELECT_FLOWER -> new SelectFlowerMessageHandler(botUser);
+            case INPUT_NUMBER_FLOWERS -> new InputNumberFlowersMessageHandler(botUser);
+            case INPUT_NUMBER_SET -> new InputNumberSetMessageHandler(botUser);
+            case SELECT_ACT -> new SelectActMessageHandler(botUser);
+            case REGISTRATION -> new RegistrationMessageHandler(botUser);
+            case INPUT_DATE -> new DateMessageHandler(botUser);
+            case SELECT_TIME -> new TimeMessageHandler(botUser);
+            case INPUT_ADDRESS -> new AddressMessageHandler(botUser);
+            case INPUT_TELEPHONE -> new TelephoneMessageHandler(botUser);
+            case INPUT_WRAPPER -> new WrapperMessageHandler(botUser);
+            case SUBMIT -> new SubmitMessageHandler(botUser);
+            case INSTRUCTION -> new InstructionMessageHandler(botUser);
+            default -> new StartMessageHandler(botUser);
+        };
     }
 
     private void usersIdCollector(Long chatId, Message message) {
@@ -111,7 +111,7 @@ public class SaleTelegramBot extends TelegramSender {
         User user = message.getFrom();
         if (botUser == null) {
             if (user.getId() != AppProperties.BOT_USER_ID) {
-                botUser = new BotUser(user.getId(),user.getFirstName());
+                botUser = new BotUser(user.getId(), user.getFirstName());
                 botUser.setUserName(user.getUserName());
                 System.out.println(botUser);
             } else {
@@ -126,7 +126,7 @@ public class SaleTelegramBot extends TelegramSender {
             botUser.setFirstName(user.getFirstName());
             botUser.setUserName(user.getUserName());
             sendMessage(AppProperties.COLLECTOR_CHAT_ID, "@" + botUser.getUserName() +
-                    " Id: " + chatId + " " + botUser.getFirstName()+ " " + getBotUsername());
+                    " Id: " + chatId + " " + botUser.getFirstName() + " " + getBotUsername());
         }
     }
 
@@ -152,6 +152,7 @@ public class SaleTelegramBot extends TelegramSender {
             e.printStackTrace();
         }
     }
+
     void photoVideoSender(BotUser botUser) {
         System.out.println("photoVideoSender");
         try {
@@ -186,7 +187,7 @@ public class SaleTelegramBot extends TelegramSender {
         String firstMessage =
                 ", здравствуйте 👋. Мы занимаемся выращиванием и продажей тюльпанов 💐 уже много лет🧘‍♀️. " +
                         "И поэтому предлагаем Вам цветок 🌼 отличного качества, различных видов, и сортов." +
-                        " А  для удобства и конечно же экономии вашего времени🤾‍♂️," +
+                        " А  для удобства и, конечно же, экономии вашего времени🤾‍♂️," +
                         "а так же денег💰,  мы создали для вас этот бот🤖. " +
                         "Да, возможно есть недоработки и недостатки🛠, но просим:  не судите строго, " +
                         "а лучше напишите🧑‍🎓✏️👨‍🎓нам об этом. Мы ведь стараемся для Вас и Вашего удобства. " +

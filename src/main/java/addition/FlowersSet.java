@@ -44,15 +44,16 @@ public class FlowersSet {
         return flowers.stream().map(Flower::getCount).reduce(Integer::sum).get() * getCountSet();
     }
 
-    public void addFlower(Flower flower){
+    public void addFlower(Flower flower) {
         flowers.add(flower);
     }
 
-    public void clean(){
+    public void clean() {
         countSet = 1;
         flowers.clear();
     }
-    public Double getCost(){
+
+    public Double getCost() {
         if (flowers.size() == 0) return 0.;
         return flowers.stream().map(Flower::getCost).reduce(Double::sum).get();
     }
@@ -61,7 +62,7 @@ public class FlowersSet {
         this.countSet = countSet;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder s = new StringBuilder();
         for (Flower flower : flowers) {
             s.append(" * ")
@@ -73,14 +74,14 @@ public class FlowersSet {
                     .append(AppProperties.MONEY)
                     .append("\n");
         }
-        s.append("Количество букетов - " )
+        s.append("Количество букетов - ")
                 .append(getCountSet())
                 .append("шт \n Стоимость  -  ")
                 .append(getCost())
                 .append("x")
                 .append(getCountSet())
                 .append("=")
-                .append(getCost()* getCountSet())
+                .append(getCost() * getCountSet())
                 .append(AppProperties.MONEY)
                 .append("\n");
         return s.toString();

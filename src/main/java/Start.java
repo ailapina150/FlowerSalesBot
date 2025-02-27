@@ -5,9 +5,9 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 public class Start {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         try {
-            TelegramBotsApi telegramBotsApi  = new TelegramBotsApi(DefaultBotSession.class);
+            TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
 
             DefaultBotOptions botOptions = new DefaultBotOptions();
             botOptions.setProxyHost(AppProperties.PROXY_HOST);

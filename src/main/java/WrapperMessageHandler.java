@@ -20,7 +20,7 @@ public class WrapperMessageHandler extends MessageHandler {
                 botUser.getOrder().setWrapper(WrapperButton.CRAFT.getName());
                 if (message.getFrom().getIsBot())
                     addStateId(sendMessage(chatId, WrapperButton.CRAFT.getName()));
-                    addStateId(sendMessageWithRowButton(chatId,
+                addStateId(sendMessageWithRowButton(chatId,
                         botUser.getOrder().toSend(),
                         List.of(ActButton.SEND.getName(), ActButton.CANCEL_REGISTRATION.getName())));
                 botUser.setCurrantState(State.SUBMIT);
@@ -30,7 +30,7 @@ public class WrapperMessageHandler extends MessageHandler {
                 botUser.getOrder().setWrapper(WrapperButton.FILM.getName());
                 if (message.getFrom().getIsBot())
                     addStateId(sendMessage(chatId, WrapperButton.FILM.getName()));
-                    addStateId(sendMessageWithRowButton(chatId,
+                addStateId(sendMessageWithRowButton(chatId,
                         botUser.getOrder().toSend(),
                         List.of(ActButton.SEND.getName(), ActButton.CANCEL_REGISTRATION.getName())));
                 botUser.setCurrantState(State.SUBMIT);

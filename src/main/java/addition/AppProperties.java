@@ -8,6 +8,7 @@ public class AppProperties {
     //public static final String PROXY_HOST = "39.102.211.162";
     public static final String PROXY_HOST = "167.172.86.46";
     //public static final int PROXY_PORT = 8080;
+
     public static final int PROXY_PORT = 10471;
 
     public static final long BOT_USER_ID = 7916734598L;
@@ -21,7 +22,7 @@ public class AppProperties {
 
     public static final String PEONY = "peony";
     public static final String TULIP = "tulip";
-    public static final String PHOTO ="photo";
+    public static final String PHOTO = "photo";
     public static final String VIDEO = "video";
     public static final String INSTRUCTION = "instruction";
 
@@ -30,8 +31,8 @@ public class AppProperties {
     public static final int NUMBER_BUTTON_IN_ROW = 2;
     public static final String MONEY = "p";
 
-    public LocalDate firstDay = LocalDate.of(2025,2,13);
-    public LocalDate lastDay = LocalDate.of(2025,3,16);
+    public LocalDate firstDay = LocalDate.of(2025, 2, 13);
+    public LocalDate lastDay = LocalDate.of(2025, 3, 16);
     public Goods goods = new Goods();
 
     public static AppProperties appProperties;
@@ -39,21 +40,28 @@ public class AppProperties {
     private AppProperties() {
     }
 
-    public static  synchronized  AppProperties get() {
-        if(appProperties == null){
+    public static synchronized AppProperties get() {
+        if (appProperties == null) {
             appProperties = new AppProperties();
         }
         return appProperties;
     }
 
-    public String getFirstDay(){
+    public String getFirstDay() {
         LocalDate nowDay = LocalDate.now().plusDays(1);
-       if(nowDay.isAfter(firstDay)) return nowDay.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-       return firstDay.format(DateTimeFormatter.ofPattern("dd.MM.yyy"));
+        if (nowDay.isAfter(firstDay)) return nowDay.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        return firstDay.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
-    public String getLastDay(){
-        return lastDay.format(DateTimeFormatter.ofPattern("dd.MM.yyy"));
+
+    public String getLastDay() {
+        return lastDay.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
-    public void setFirstDay(LocalDate date) {firstDay = date;}
-    public void setLastDay(LocalDate date) {lastDay = date;}
+
+    public void setFirstDay(LocalDate date) {
+        firstDay = date;
+    }
+
+    public void setLastDay(LocalDate date) {
+        lastDay = date;
+    }
 }
