@@ -11,9 +11,9 @@ public class AppProperties {
 
     public static final int PROXY_PORT = 10471;
 
-    public static final long BOT_USER_ID = 7860021560L;
-    public static final String BOT_USER_NAME = "Vlad3456bot";
-    public static final String BOT_TOKEN = System.getenv("TELEGRAM_TOKEN");
+    public static final long BOT_USER_ID = 7916734598L;
+    public static final String BOT_USER_NAME = "chart112233bot";
+    public static final String BOT_TOKEN = "7916734598:AAEA2-SmSzjj5rG1Qs9j4ytlRr9qTqCri9c";//chart112233bot
 
     public static final Long ORDERS_CHAT_ID = -1002321853789L;
     public static final Long COLLECTOR_CHAT_ID = -1002353117943L;
